@@ -14,4 +14,8 @@
 
 - előkészítjük a commit-ra (beindexelődnek), mindent eltárolunk
     > git add .
-    
+
+- ellenörzés
+    > git status
+- eltárolja az újabb verziónak:
+    > git commit -m "first"
