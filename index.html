@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="getData.js"></script>
+    <title>Document</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Sanchez&display=swap');
+      body {
+        transition: background-color 0.5s;
+        font-family: 'Sanchez', serif;
+      }
+      .dark-theme {
+        background-color: rgb(27, 27, 27);
+        color: white;
+        .card{
+          background-color: rgb(27, 27, 27);
+          color: white;
+          border: 1px solid grey;
+        }
+        .modal{
+          background-color: rgb(27, 27, 27);
+          color: white;
+        }
+        .modal-body{
+          background-color: rgb(27, 27, 27);
+          color: white;
+        }
+        .modal-header{
+          background-color: rgb(27, 27, 27);
+          color: white;
+        }
+        .modal-footer{
+          background-color: rgb(27, 27, 27);
+          color: white;
+        }
+      }
+      .card{
+        max-width: 260px;
+      }
+      img{
+        max-height: 150px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexSwitchCheckChecked"
+          onchange="changeTheme()"
+        />
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Switch Light/Dark</label
+        >
+      </div>
+      <h1 class="text-center">Travel Agency</h1>
+      <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        
+      </div>
+      
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title h5" id="staticBackdropLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="" class="img-fluid img" alt="">
+            <p class="p"></p>
+            <h6 class="price"></h6>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let h5 = document.querySelector(".h5")
+      let p = document.querySelector(".p")
+      let img = document.querySelector(".img")
+      let price = document.querySelector(".price")
+      const changeTheme = () => {
+        document.body.classList.toggle("dark-theme");
+      };
+      getData("https://raw.githubusercontent.com/mkatay/json-tours/main/tours", renderTours);
+      function showModal(e){
+        p.innerHTML = e.target.dataset.info
+        img.src = e.target.dataset.img
+        h5.innerHTML = e.target.dataset.h5
+        price.innerHTML = e.target.dataset.price
+
+      }
+      function renderTours(data) {
+        console.log(data);
+        data.forEach((obj) => {
+          console.log(obj.name);
+          document.querySelector(".row").innerHTML += `<div class="card col" style="width: 18rem;">
+  <img src="${obj.image}" class="card-img-top p-1 img-fluid" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${obj.name}</h5>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="showModal(event)" data-price="$${obj.price}" data-h5="${obj.name}" data-img="${obj.image}" data-info="${obj.info}" data-bs-target="#staticBackdrop">More info</button>
+  </div>
+</div>
+`
+        });
+      }
+    </script>
+  </body>
+</html>
