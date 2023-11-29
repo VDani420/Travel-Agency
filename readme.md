@@ -19,3 +19,11 @@
     > git status
 - eltárolja az újabb verziónak:
     > git commit -m "first"
+
+## összekapcsolás a távoli repoval(Github)
+
+- új github repo létrehozása
+- helyi repo összekapcsolása a távolival
+    > git remote add origin https://token@github.com/VDani420/Travel-Agency.git
+- első push-nál meg kell mondani a branch nevét:
+    > git push -u origin master
