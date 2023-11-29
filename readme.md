@@ -27,3 +27,5 @@
     > git remote add origin https://token@github.com/VDani420/Travel-Agency.git
 - első push-nál meg kell mondani a branch nevét:
     > git push -u origin master
+
+- új cucc
